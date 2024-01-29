@@ -26,7 +26,7 @@ class SiteController extends Controller
             'name' => 'required|max:100',
             'number' => 'required|max:100',
         ]);
-        
+
         $request['user_id'] = auth()->user()->id;
         $vehicle = Vehicle::create($request->all());
 
@@ -35,7 +35,7 @@ class SiteController extends Controller
         }
 
         return redirect()->back()->with('success', 'Vehicle Berhasil di simpan')->with('page', '#vehiclePage');
-    }    
+    }
 
     public function updateVehicle(Request $request){
         $this->validate($request, [
@@ -52,14 +52,14 @@ class SiteController extends Controller
         }
 
         return redirect()->back()->with('success', 'Vehicle Berhasil di update')->with('page', '#vehiclePage');
-    }    
+    }
 
     public function deleteVehicle($id){
         $vehicle = Vehicle::find($id);
         $vehicle->clearMediaCollection('vehicles');
         $vehicle->delete();
         return redirect()->back()->with('success', 'Vehicle Berhasil di hapus')->with('page', '#vehiclePage');
-    }    
+    }
 
     public function topup(Request $request){
         $request['user_id'] = auth()->user()->id;
@@ -97,6 +97,7 @@ class SiteController extends Controller
                 )
             );
             $topup->update(['payment_token' => Snap::getSnapToken($params)]);
+
             return view('site.payment', compact('topup'));
         }elseif($topup->status == 'Unpaid'){
             return view('site.payment', compact('topup'));
@@ -119,7 +120,7 @@ class SiteController extends Controller
             // elseif($request->transaction_status == 'expire'){
 
             // }elseif($request->transaction_status == 'refund'){
-                        
+
             // }
 
             return $topup->status;
@@ -137,7 +138,7 @@ class SiteController extends Controller
             return 'Saldo tidak cukup';
         }
         Transaction::create([
-            'vehicle_id' => $vehicle->id, 'price' => $request->price, 
+            'vehicle_id' => $vehicle->id, 'price' => $request->price,
             'saldo_awal' => $user->balance, 'saldo_akhir' => $user->balance - $request->price,
         ]);
         $user->update(['balance' => $user->balance - $request->price]);

@@ -127,7 +127,7 @@ http://www.tooplate.com/view/2109-the-card
                                                 <a class="btn btn-warning" href="/vehicle/{{$vehicle->id}}/delete">Hapus</a>
                                             </p>
                                         </figcaption>
-                                    </figure>  
+                                    </figure>
                                     <!-- Modal Edit -->
                                     <div class="modal fade" style="text-align: left" id="editVehicle{{$vehicle->id}}" tabindex="-1" aria-labelledby="editVehicleLabel"
                                         aria-hidden="true">
@@ -177,7 +177,7 @@ http://www.tooplate.com/view/2109-the-card
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>                                  
+                                    </div>
                                 @endforeach
                             </div>
                         </section>
